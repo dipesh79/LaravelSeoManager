@@ -25,8 +25,8 @@
     <!-- Schema Markup -->
     <script type="application/ld+json">
         {
-            "@context": "https://schema.org",
-            "@type": "{{ $schemaType }}",
+            "@@context": "https://schema.org",
+            "@@type": "{{ $schemaType }}",
             "name": "{{ $schemaName }}",
             "description": "{{ $schemaDescription }}",
             "url": "{{ $schemaUrl }}"
