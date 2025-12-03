@@ -70,7 +70,7 @@
 
         <!-- Pagination Controls -->
         <div class="mt-3">
-            {{ $tags->links() }}
+            {{ $tags->links('pagination::bootstrap-4') }}
         </div>
     </div>
 
