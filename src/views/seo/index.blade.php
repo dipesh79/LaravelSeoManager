@@ -9,18 +9,21 @@
             <!-- Buttons -->
             <div>
                 <a href="{{ route('admin.seo.create') }}" class="btn btn-primary me-2">Add New Page</a>
-                <form id="generate-form" action="{{ route('admin.seo.generate-static-pages') }}" method="POST" class="d-inline">
+                <form id="generate-form" action="{{ route('admin.seo.generate-static-pages') }}" method="POST"
+                      class="d-inline">
                     @csrf
                     <button id="generate-btn" type="submit" class="btn btn-secondary">
                         <span id="generate-text">Generate Static Pages</span>
-                        <span id="spinner" class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" style="display: none;"></span>
+                        <span id="spinner" class="spinner-border spinner-border-sm ms-2" role="status"
+                              aria-hidden="true" style="display: none;"></span>
                     </button>
                 </form>
             </div>
 
             <!-- Search Form -->
             <form action="{{ route('admin.seo.index') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2" value="{{ $search }}" placeholder="Search...">
+                <input type="text" name="search" class="form-control me-2" value="{{ $search }}"
+                       placeholder="Search...">
                 <button type="submit" class="btn btn-primary">Search</button>
                 @if ($search)
                     <a href="{{ route('admin.seo.index') }}" class="btn btn-danger ms-2" title="Clear Search">X</a>
@@ -50,13 +53,25 @@
                         <td>{{ $tag->uri }}</td>
                         <td>{{ $tag->title }}</td>
                         <td>
-                            <a href="{{ route('admin.seo.show', $tag->id) }}" class="btn btn-primary btn-sm">View</a>
-                            <a href="{{ route('admin.seo.edit', $tag->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.seo.delete', $tag->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this tag?');">Delete</button>
-                            </form>
+                            @if(auth()->user()->canViewSeo())
+                                <a href="{{ route('admin.seo.show', $tag->id) }}"
+                                   class="btn btn-primary btn-sm">View</a>
+                            @endif
+                            @if(auth()->user()->canUpdateSeo())
+                                <a href="{{ route('admin.seo.edit', $tag->id) }}"
+                                   class="btn btn-warning btn-sm">Edit</a>
+                            @endif
+                            @if(auth()->user()->canDeleteSeo())
+
+                                <form action="{{ route('admin.seo.delete', $tag->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete this tag?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @empty
