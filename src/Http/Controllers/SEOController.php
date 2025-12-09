@@ -167,7 +167,6 @@ class SEOController extends Controller
 
         } catch (Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             return back()->with('error', 'Something went wrong. Please try again');
         }
         DB::commit();
