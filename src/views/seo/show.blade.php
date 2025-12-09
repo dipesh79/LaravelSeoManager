@@ -110,30 +110,6 @@
             <!-- Schema Tags -->
             <h3 class="mb-4">Schema Tags</h3>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Schema Type:</label>
-                <div class="col-sm-9">
-                    <p class="card-text">{{ $tag->schema_type }}</p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Schema Name:</label>
-                <div class="col-sm-9">
-                    <p class="card-text">{{ $tag->schema_name }}</p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Schema Description:</label>
-                <div class="col-sm-9">
-                    <p class="card-text">{{ $tag->schema_description }}</p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Schema URL:</label>
-                <div class="col-sm-9">
-                    <p class="card-text">{{ $tag->schema_url }}</p>
-                </div>
-            </div>
-            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Json LD:</label>
                 <div class="col-sm-9">
                     <p class="card-text">{{ $tag->json_ld }}</p>

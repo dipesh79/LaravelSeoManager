@@ -44,18 +44,22 @@ class LaravelSeoManagerServiceProvider extends ServiceProvider
                 $this->publishes([
                     __DIR__ . '/migrations/create_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
                             time()) . '_create_seo_tags_table.php'),
+                    __DIR__ . '/migrations/add_json_ld_column_to_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
+                            time() + 1) . '_add_json_ld_column_to_seo_tags_table.php'),
+                    __DIR__ . '/migrations/remove_old_json_schema_columns_from_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
+                            time() + 2) . '_remove_old_json_schema_columns_from_seo_tags_table.php'),
                 ], 'migrations');
+            } elseif (!Schema::hasColumn('seo_tags', 'json_ld')) {
                 $this->publishes([
                     __DIR__ . '/migrations/add_json_ld_column_to_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
                             time() + 1) . '_add_json_ld_column_to_seo_tags_table.php'),
                 ], 'migrations');
-
             }
-            elseif (!Schema::hasColumn('seo_tags', 'json_ld')) {
+            if (Schema::hasColumn('seo_tags', 'schema_type')) {
                 $this->publishes([
-                    __DIR__ . '/migrations/add_json_ld_column_to_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
-                            time() + 1) . '_add_json_ld_column_to_seo_tags_table.php'),
-                ], 'migrations');
+                    __DIR__ . '/migrations/remove_old_json_schema_columns_from_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
+                            time() + 2) . '_remove_old_json_schema_columns_from_seo_tags_table.php'),
+                ]);
             }
 
             $this->publishes([

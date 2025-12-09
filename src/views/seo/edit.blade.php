@@ -50,7 +50,8 @@
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror"
-                                              id="description" name="description">{{ old('description', $tag->description) }}</textarea>
+                                              id="description"
+                                              name="description">{{ old('description', $tag->description) }}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -136,7 +137,8 @@
                                            id="og_image" name="og_image">
                                     @if($tag->og_image)
                                         <div class="mt-2">
-                                            <img src="{{ asset('storage/' . $tag->og_image) }}" alt="OG Image" class="img-thumbnail" style="max-width: 200px;">
+                                            <img src="{{ asset('storage/' . $tag->og_image) }}" alt="OG Image"
+                                                 class="img-thumbnail" style="max-width: 200px;">
                                         </div>
                                     @endif
                                     @error('og_image')
@@ -165,7 +167,8 @@
                                 <div class="mb-3">
                                     <label for="twitter_card" class="form-label">Twitter Card</label>
                                     <input type="text" class="form-control @error('twitter_card') is-invalid @enderror"
-                                           id="twitter_card" name="twitter_card" value="{{ old('twitter_card', $tag->twitter_card) }}">
+                                           id="twitter_card" name="twitter_card"
+                                           value="{{ old('twitter_card', $tag->twitter_card) }}">
                                     @error('twitter_card')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -176,7 +179,8 @@
                                 <div class="mb-3">
                                     <label for="twitter_title" class="form-label">Twitter Title</label>
                                     <input type="text" class="form-control @error('twitter_title') is-invalid @enderror"
-                                           id="twitter_title" name="twitter_title" value="{{ old('twitter_title', $tag->twitter_title) }}">
+                                           id="twitter_title" name="twitter_title"
+                                           value="{{ old('twitter_title', $tag->twitter_title) }}">
                                     @error('twitter_title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -202,7 +206,8 @@
                                            id="twitter_image" name="twitter_image">
                                     @if($tag->twitter_image)
                                         <div class="mt-2">
-                                            <img src="{{ asset('storage/' . $tag->twitter_image) }}" alt="Twitter Image" class="img-thumbnail" style="max-width: 200px;">
+                                            <img src="{{ asset('storage/' . $tag->twitter_image) }}" alt="Twitter Image"
+                                                 class="img-thumbnail" style="max-width: 200px;">
                                         </div>
                                     @endif
                                     @error('twitter_image')
@@ -228,51 +233,6 @@
                              class="accordion-collapse collapse @error('schema_type') show @enderror @error('schema_name') show @enderror @error('schema_description') show @enderror @error('schema_url') show @enderror"
                              aria-labelledby="schemaTagsHeading" data-bs-parent="#seoTagsAccordion">
                             <div class="accordion-body">
-                                <div class="mb-3">
-                                    <label for="schema_type" class="form-label">Schema Type</label>
-                                    <input type="text" class="form-control @error('schema_type') is-invalid @enderror"
-                                           id="schema_type" name="schema_type" value="{{ old('schema_type', $tag->schema_type) }}">
-                                    @error('schema_type')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="schema_name" class="form-label">Schema Name</label>
-                                    <input type="text" class="form-control @error('schema_name') is-invalid @enderror"
-                                           id="schema_name" name="schema_name" value="{{ old('schema_name', $tag->schema_name) }}">
-                                    @error('schema_name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="schema_description" class="form-label">Schema Description</label>
-                                    <textarea class="form-control @error('schema_description') is-invalid @enderror"
-                                              id="schema_description"
-                                              name="schema_description">{{ old('schema_description', $tag->schema_description) }}</textarea>
-                                    @error('schema_description')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="schema_url" class="form-label">Schema URL</label>
-                                    <input type="url" class="form-control @error('schema_url') is-invalid @enderror"
-                                           id="schema_url" name="schema_url" value="{{ old('schema_url', $tag->schema_url) }}">
-                                    @error('schema_url')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
                                 <div class="mb-3">
                                     <label for="json_ld" class="form-label">Json Ld</label>
                                     <textarea class="form-control @error('json_ld') is-invalid @enderror"

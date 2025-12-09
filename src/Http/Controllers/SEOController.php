@@ -66,10 +66,6 @@ class SEOController extends Controller
                     'twitter_card' => $request->twitter_card,
                     'twitter_title' => $request->twitter_title,
                     'twitter_description' => $request->twitter_description,
-                    'schema_type' => $request->schema_type,
-                    'schema_name' => $request->schema_name,
-                    'schema_description' => $request->schema_description,
-                    'schema_url' => $request->schema_url,
                     'type' => $request->type,
                     'json_ld' => $request->json_ld,
                 ]
@@ -150,10 +146,6 @@ class SEOController extends Controller
                     'twitter_card' => $request->twitter_card,
                     'twitter_title' => $request->twitter_title,
                     'twitter_description' => $request->twitter_description,
-                    'schema_type' => $request->schema_type,
-                    'schema_name' => $request->schema_name,
-                    'schema_description' => $request->schema_description,
-                    'schema_url' => $request->schema_url,
                     'type' => $request->type,
                     'json_ld' => $request->json_ld
                 ]
