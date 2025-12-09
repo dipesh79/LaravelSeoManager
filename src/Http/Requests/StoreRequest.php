@@ -43,10 +43,6 @@ class StoreRequest extends FormRequest
             'twitter_title' => ['nullable', 'string'],
             'twitter_description' => ['nullable', 'string'],
             'twitter_image' => ['nullable', 'image'],
-            'schema_type' => ['nullable', 'string'],
-            'schema_name' => ['nullable', 'string'],
-            'schema_description' => ['nullable', 'string'],
-            'schema_url' => ['nullable', 'url'],
             'type' => ['required', 'string', 'in:static,dynamic'],
             'json_ld' => ['nullable', 'string', 'json'],
         ];
