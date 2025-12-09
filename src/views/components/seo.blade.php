@@ -32,3 +32,9 @@
             "url": "{{ $schemaUrl }}"
     }
     </script>
+
+    @if($jsonLd)
+        <script type="application/ld+json">
+            {!! $jsonLd!!}
+        </script>
+    @endif

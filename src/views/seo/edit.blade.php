@@ -272,6 +272,17 @@
                                     </div>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="json_ld" class="form-label">Json Ld</label>
+                                    <textarea class="form-control @error('json_ld') is-invalid @enderror"
+                                              id="json_ld" name="json_ld">{{ old('json_ld', $tag->json_ld) }}</textarea>
+                                    @error('json_ld')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

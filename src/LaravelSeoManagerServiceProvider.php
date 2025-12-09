@@ -45,6 +45,17 @@ class LaravelSeoManagerServiceProvider extends ServiceProvider
                     __DIR__ . '/migrations/create_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
                             time()) . '_create_seo_tags_table.php'),
                 ], 'migrations');
+                $this->publishes([
+                    __DIR__ . '/migrations/add_json_ld_column_to_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
+                            time() + 1) . '_add_json_ld_column_to_seo_tags_table.php'),
+                ], 'migrations');
+
+            }
+            elseif (!Schema::hasColumn('seo_tags', 'json_ld')) {
+                $this->publishes([
+                    __DIR__ . '/migrations/add_json_ld_column_to_seo_tags_table.php.stub' => database_path('migrations/' . date('Y_m_d_His',
+                            time() + 1) . '_add_json_ld_column_to_seo_tags_table.php'),
+                ], 'migrations');
             }
 
             $this->publishes([

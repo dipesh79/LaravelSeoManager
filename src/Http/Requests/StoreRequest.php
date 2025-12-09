@@ -48,6 +48,7 @@ class StoreRequest extends FormRequest
             'schema_description' => ['nullable', 'string'],
             'schema_url' => ['nullable', 'url'],
             'type' => ['required', 'string', 'in:static,dynamic'],
+            'json_ld' => ['nullable', 'string', 'json'],
         ];
     }
 
@@ -63,6 +64,7 @@ class StoreRequest extends FormRequest
             'uri.unique' => 'URI is already taken',
             'type.required' => 'Type is required',
             'type.in' => 'Type must be static or dynamic',
+            'json_ld.json' => 'The JSON-LD field must contain a valid JSON object.',
         ];
     }
 }

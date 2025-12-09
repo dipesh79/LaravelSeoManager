@@ -36,6 +36,8 @@ class Seo extends Component
     public string|null $schemaDescription;
     public string|null $schemaUrl;
 
+    public string|null $jsonLd;
+
     /**
      * Create a new component instance.
      *
@@ -80,6 +82,7 @@ class Seo extends Component
         $this->schemaName = config('laravel-seo-manager.schema.name');
         $this->schemaDescription = config('laravel-seo-manager.schema.description');
         $this->schemaUrl = $this->canonical;
+        $this->jsonLd = null;
     }
 
     /**
@@ -129,6 +132,7 @@ class Seo extends Component
         $this->schemaName = $this->getSeoAttribute($seoTag->schema_name, 'schema.name');
         $this->schemaDescription = $this->getSeoAttribute($seoTag->schema_description, 'schema.description');
         $this->schemaUrl = $this->getSeoAttribute($seoTag->schema_url, 'schema.url', $this->canonical);
+        $this->jsonLd = $seoTag->json_ld ?: null;
     }
 
     /**
