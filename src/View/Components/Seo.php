@@ -31,11 +31,6 @@ class Seo extends Component
     public string|null $twitterDescription;
     public string|null $twitterImage;
 
-    public string|null $schemaType;
-    public string|null $schemaName;
-    public string|null $schemaDescription;
-    public string|null $schemaUrl;
-
     public string|null $jsonLd;
 
     /**
@@ -68,20 +63,16 @@ class Seo extends Component
         $this->keywords = config('laravel-seo-manager.keywords');
         $this->robots = config('laravel-seo-manager.robots');
 
-        $this->ogTitle = config('laravel-seo-manager.og.title');
-        $this->ogDescription = config('laravel-seo-manager.og.description');
-        $this->ogImage = config('laravel-seo-manager.og.image');
+        $this->ogTitle = null;
+        $this->ogDescription = null;
+        $this->ogImage = null;
         $this->ogUrl = $this->canonical;
 
-        $this->twitterCard = config('laravel-seo-manager.twitter.card');
-        $this->twitterTitle = config('laravel-seo-manager.twitter.title');
-        $this->twitterDescription = config('laravel-seo-manager.twitter.description');
-        $this->twitterImage = config('laravel-seo-manager.twitter.image');
+        $this->twitterCard = null;
+        $this->twitterTitle = null;
+        $this->twitterDescription = null;
+        $this->twitterImage = null;
 
-        $this->schemaType = config('laravel-seo-manager.schema.type');
-        $this->schemaName = config('laravel-seo-manager.schema.name');
-        $this->schemaDescription = config('laravel-seo-manager.schema.description');
-        $this->schemaUrl = $this->canonical;
         $this->jsonLd = null;
     }
 
@@ -118,20 +109,16 @@ class Seo extends Component
         $this->keywords = $this->getSeoAttribute($seoTag->keywords, 'keywords');
         $this->robots = $this->getSeoAttribute($seoTag->robots, 'robots');
 
-        $this->ogTitle = $this->getSeoAttribute($seoTag->og_title, 'og.title');
-        $this->ogDescription = $this->getSeoAttribute($seoTag->og_description, 'og.description');
-        $this->ogImage = $this->getSeoAttribute($seoTag->og_image, 'og.image');
-        $this->ogUrl = $this->getSeoAttribute($seoTag->og_url, 'og.url', $this->canonical);
+        $this->ogTitle = $seoTag->title ?? null;
+        $this->ogDescription = $seoTag->og_description ?? null;
+        $this->ogImage = $seoTag->og_image ?? null;
+        $this->ogUrl = $seoTag->og_url ?: $this->canonical;
 
-        $this->twitterCard = $this->getSeoAttribute($seoTag->twitter_card, 'twitter.card');
-        $this->twitterTitle = $this->getSeoAttribute($seoTag->twitter_title, 'twitter.title');
-        $this->twitterDescription = $this->getSeoAttribute($seoTag->twitter_description, 'twitter.description');
-        $this->twitterImage = $this->getSeoAttribute($seoTag->twitter_image, 'twitter.image');
+        $this->twitterCard = $seoTag->twitter_card ?? null;
+        $this->twitterTitle = $seoTag->twitter_title ?? null;
+        $this->twitterDescription = $seoTag->twitter_description ?? null;
+        $this->twitterImage = $seoTag->twitter_image ?? null;
 
-        $this->schemaType = $this->getSeoAttribute($seoTag->schema_type, 'schema.type');
-        $this->schemaName = $this->getSeoAttribute($seoTag->schema_name, 'schema.name');
-        $this->schemaDescription = $this->getSeoAttribute($seoTag->schema_description, 'schema.description');
-        $this->schemaUrl = $this->getSeoAttribute($seoTag->schema_url, 'schema.url', $this->canonical);
         $this->jsonLd = $seoTag->json_ld ?: null;
     }
 

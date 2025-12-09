@@ -24,11 +24,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property mixed $twitter_title The Twitter title tag for SEO.
  * @property mixed $twitter_description The Twitter description tag for SEO.
  * @property mixed $twitter_image The Twitter image tag for SEO.
- * @property mixed $schema_type The schema type for SEO.
- * @property mixed $schema_name The schema name for SEO.
- * @property mixed $schema_description The schema description tag for SEO.
- * @property mixed $schema_url The schema URL for SEO.
  * @property mixed $uri The URI associated with the SEO tags.
+ * @property mixed $json_ld The JSON-LD structured data for SEO.
  * @package App\Models
  * @method static firstOrCreate(array $array, string[] $array1) Find the first record matching the attributes or create it.
  * @method static where(string $string, string $operator, string $url) Add a basic where clause to the query.

@@ -230,7 +230,7 @@
                             </button>
                         </h2>
                         <div id="schemaTagsCollapse"
-                             class="accordion-collapse collapse @error('schema_type') show @enderror @error('schema_name') show @enderror @error('schema_description') show @enderror @error('schema_url') show @enderror"
+                             class="accordion-collapse collapse @error('json_ld') show @enderror"
                              aria-labelledby="schemaTagsHeading" data-bs-parent="#seoTagsAccordion">
                             <div class="accordion-body">
                                 <div class="mb-3">
