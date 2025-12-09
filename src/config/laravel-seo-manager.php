@@ -2,6 +2,10 @@
 
 return [
     /**
+     * Enable or Disable SEO Manager Dashboard.
+     */
+    'show_dashboard' => true,
+    /**
      * Middleware for SEO Manager Route.
      */
     'middleware' => ['web', 'auth'],
