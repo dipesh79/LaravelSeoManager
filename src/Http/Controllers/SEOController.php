@@ -71,6 +71,7 @@ class SEOController extends Controller
                     'schema_description' => $request->schema_description,
                     'schema_url' => $request->schema_url,
                     'type' => $request->type,
+                    'json_ld' => $request->json_ld,
                 ]
             );
             if ($request->og_image) {
@@ -154,6 +155,7 @@ class SEOController extends Controller
                     'schema_description' => $request->schema_description,
                     'schema_url' => $request->schema_url,
                     'type' => $request->type,
+                    'json_ld' => $request->json_ld
                 ]
             );
             if ($request->og_image) {
@@ -165,6 +167,7 @@ class SEOController extends Controller
 
         } catch (Exception $exception) {
             DB::rollBack();
+            dd($exception->getMessage());
             return back()->with('error', 'Something went wrong. Please try again');
         }
         DB::commit();

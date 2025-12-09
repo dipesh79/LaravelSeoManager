@@ -31,7 +31,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property mixed $uri The URI associated with the SEO tags.
  * @package App\Models
  * @method static firstOrCreate(array $array, string[] $array1) Find the first record matching the attributes or create it.
- * @method static where(string $string,string $operator,string $url) Add a basic where clause to the query.
+ * @method static where(string $string, string $operator, string $url) Add a basic where clause to the query.
  */
 class Seo extends Model implements HasMedia
 {
@@ -57,6 +57,15 @@ class Seo extends Model implements HasMedia
      * @var string
      */
     protected $table = 'seo_tags';
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'json_ld' => 'array',
+    ];
 
     /**
      * Get the parent seoable model (morph to relationship).

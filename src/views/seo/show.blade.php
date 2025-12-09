@@ -133,6 +133,12 @@
                     <p class="card-text">{{ $tag->schema_url }}</p>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Json LD:</label>
+                <div class="col-sm-9">
+                    <p class="card-text">{{ $tag->json_ld }}</p>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
