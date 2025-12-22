@@ -111,13 +111,13 @@ class Seo extends Component
 
         $this->ogTitle = $seoTag->title ?? null;
         $this->ogDescription = $seoTag->og_description ?? null;
-        $this->ogImage = $seoTag->og_image ?? null;
+        $this->ogImage = $seoTag->ogImage() ?? null;
         $this->ogUrl = $seoTag->og_url ?: $this->canonical;
 
         $this->twitterCard = $seoTag->twitter_card ?? null;
         $this->twitterTitle = $seoTag->twitter_title ?? null;
         $this->twitterDescription = $seoTag->twitter_description ?? null;
-        $this->twitterImage = $seoTag->twitter_image ?? null;
+        $this->twitterImage = $seoTag->twitterImage() ?? null;
 
         $this->jsonLd = $seoTag->json_ld ?: null;
     }
