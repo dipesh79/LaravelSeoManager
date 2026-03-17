@@ -79,7 +79,7 @@ class Seo extends Model implements HasMedia
      *
      * @return string The URL of the Open Graph image or the default image URL from the configuration.
      */
-    public function ogImage(): string
+    public function ogImage(): ?string
     {
         return $this->getMedia('og')->count()
             ? $this->getMedia('og')
@@ -93,7 +93,7 @@ class Seo extends Model implements HasMedia
      *
      * @return string The URL of the Twitter image or the default image URL from the configuration.
      */
-    public function twitterImage(): string
+    public function twitterImage(): ?string
     {
         return $this->getMedia('twitter')->count()
             ? $this->getMedia('twitter')
