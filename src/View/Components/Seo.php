@@ -6,13 +6,6 @@ use Dipesh79\LaravelSeoManager\Models\Seo as SeoModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-/**
- * Class Seo
- *
- * This component is responsible for managing SEO attributes for a given page.
- * It retrieves SEO data from the database based on the current URL and applies
- * the appropriate SEO attributes.
- */
 class Seo extends Component
 {
     public string|null $title;
@@ -33,19 +26,14 @@ class Seo extends Component
 
     public string|null $jsonLd;
 
-    /**
-     * Create a new component instance.
-     *
-     * Initializes the SEO attributes by setting default values and then
-     * attempting to override them with values from the database if a match
-     * is found for the current URL.
-     */
     public function __construct()
     {
         $url = request()->path();
-        $this->canonical = url()->current();
+
+        $this->canonical = $this->getCanonicalUrl();
 
         $this->setDefaultSeoAttributes();
+
         $seoTag = $this->getSeoTag($url);
 
         if ($seoTag) {
@@ -54,8 +42,53 @@ class Seo extends Component
     }
 
     /**
-     * Set default SEO attributes from the configuration.
+     * Get the canonical URL for the current page.
+     *
+     * Pagination parameters such as ?page=2 are preserved.
+     *
+     * Tracking parameters and other non-canonical query parameters
+     * should not be included.
      */
+    private function getCanonicalUrl(): string
+    {
+        $query = request()->query();
+
+        /*
+         * Parameters that should never be part of the canonical URL.
+         */
+        $excludedParameters = [
+            'utm_source',
+            'utm_medium',
+            'utm_campaign',
+            'utm_term',
+            'utm_content',
+            'gclid',
+            'fbclid',
+        ];
+
+        $query = collect($query)
+            ->except($excludedParameters)
+            ->all();
+
+        /*
+         * Remove empty values.
+         */
+        $query = collect($query)
+            ->filter(fn ($value) => filled($value))
+            ->all();
+
+        /*
+         * Build the canonical URL.
+         */
+        $url = url()->current();
+
+        if (!empty($query)) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        return $url;
+    }
+
     private function setDefaultSeoAttributes(): void
     {
         $this->title = config('laravel-seo-manager.title');
@@ -76,17 +109,13 @@ class Seo extends Component
         $this->jsonLd = null;
     }
 
-    /**
-     * Retrieve the SEO tag from the database based on the current URL.
-     *
-     * @param string $url The current URL path.
-     * @return SeoModel|null The SEO model if a match is found, otherwise null.
-     */
     private function getSeoTag(string $url): ?SeoModel
     {
         $seoTag = SeoModel::where('uri', '=', $url)->first();
+
         if (!$seoTag) {
             $seoTags = SeoModel::all();
+
             foreach ($seoTags as $tag) {
                 if (fnmatch($tag->uri, $url)) {
                     $seoTag = $tag;
@@ -94,20 +123,31 @@ class Seo extends Component
                 }
             }
         }
+
         return $seoTag;
     }
 
-    /**
-     * Apply the SEO attributes from the given SEO model.
-     *
-     * @param SeoModel $seoTag The SEO model containing the attributes to apply.
-     */
     private function applySeoAttributes(SeoModel $seoTag): void
     {
-        $this->title = $this->getSeoAttribute($seoTag->title, 'title');
-        $this->description = $this->getSeoAttribute($seoTag->description, 'description');
-        $this->keywords = $this->getSeoAttribute($seoTag->keywords, 'keywords');
-        $this->robots = $this->getSeoAttribute($seoTag->robots, 'robots');
+        $this->title = $this->getSeoAttribute(
+            $seoTag->title,
+            'title'
+        );
+
+        $this->description = $this->getSeoAttribute(
+            $seoTag->description,
+            'description'
+        );
+
+        $this->keywords = $this->getSeoAttribute(
+            $seoTag->keywords,
+            'keywords'
+        );
+
+        $this->robots = $this->getSeoAttribute(
+            $seoTag->robots,
+            'robots'
+        );
 
         $this->ogTitle = $seoTag->title ?? null;
         $this->ogDescription = $seoTag->og_description ?? null;
@@ -122,24 +162,17 @@ class Seo extends Component
         $this->jsonLd = $seoTag->json_ld ?: null;
     }
 
-    /**
-     * Get the SEO attribute value, falling back to a configuration value if not set.
-     *
-     * @param string|null $attribute The attribute value from the SEO model.
-     * @param string $configKey The configuration key to use if the attribute is not set.
-     * @param string|null $default The default value to use if neither the attribute nor the configuration value is set.
-     * @return string|null The final attribute value.
-     */
-    private function getSeoAttribute(?string $attribute, string $configKey, ?string $default = null): ?string
-    {
-        return $attribute ?: config("laravel-seo-manager.$configKey", $default);
+    private function getSeoAttribute(
+        ?string $attribute,
+        string $configKey,
+        ?string $default = null
+    ): ?string {
+        return $attribute ?: config(
+            "laravel-seo-manager.$configKey",
+            $default
+        );
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return View The view representing the component.
-     */
     public function render(): View
     {
         return view('seo::components.seo');
